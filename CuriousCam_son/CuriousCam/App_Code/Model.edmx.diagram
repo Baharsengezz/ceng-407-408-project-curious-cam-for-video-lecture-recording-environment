@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1371c583377d4fadb3b301e5156683d9" Name="Diagram1">
+        <EntityTypeShape EntityType="CuriousCamModel.Departments" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuriousCamModel.Faculties" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuriousCamModel.SubTopics" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuriousCamModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuriousCamModel.Topics" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuriousCamModel.Users" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuriousCamModel.Videos" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
+        <AssociationConnector Association="CuriousCamModel.FK_Departments_Faculties" ManuallyRouted="false" />
+        <AssociationConnector Association="CuriousCamModel.FK_Instructors_Departments" ManuallyRouted="false" />
+        <AssociationConnector Association="CuriousCamModel.FK_Instructors_Faculties" ManuallyRouted="false" />
+        <AssociationConnector Association="CuriousCamModel.FK_SubTopics_Topics" ManuallyRouted="false" />
+        <AssociationConnector Association="CuriousCamModel.FK_Videos_SubTopics" ManuallyRouted="false" />
+        <AssociationConnector Association="CuriousCamModel.FK_Videos_Topics" ManuallyRouted="false" />
+        <AssociationConnector Association="CuriousCamModel.FK_Videos_Instructors" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

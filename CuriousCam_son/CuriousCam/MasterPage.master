@@ -1,0 +1,248 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<%-- This page is the main template for all other pages of the web site --%>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-language" content="tr-TR" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<meta name="author" content="Elifnur Altundaş" />
+	<meta name="description" content="Curious Cam Video Sahring Web Site" />
+	<meta name="keywords" content="Curious Cam, Lecture, Course, Video, Sharing" />
+
+	<meta name="robots" content="all" />
+	<meta name="robots" content="index, follow" />
+	<meta name="copyright" content="Copyright - Tüh Hakları Saklıdır. 2018 www.curiouscam.com" />	
+
+
+    <title>CriousCam</title>
+
+    <!-- Core CSS - Include with every page -->
+    <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
+    <link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/main-style.css" rel="stylesheet" />
+
+	<link rel="shortcut icon" href="icon.png" type="image/x-png" sizes="32x32" />
+	<link rel="icon" type="image/x-png" href="ico.png" sizes="32x32" />
+
+	<script type="text/javascript" src="main-js.js"></script>
+	<link href="main-css.css" rel="stylesheet" />
+
+     <!-- The placeholder for external additions into head -->
+    <asp:ContentPlaceHolder id="head_holder" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <%-- Confirm kutusu yapmak için, internetten hazır alındı --%>
+
+    <script type="text/javascript">
+        function Confirm(msg) {
+            var confirm_value = document.createElement("INPUT");
+            confirm_value.type = "hidden";
+            confirm_value.name = "confirm_value";
+            if (confirm(msg)) {
+                confirm_value.value = "Yes";
+            }
+            else {
+                confirm_value.value = "No";
+            }
+            document.forms[0].appendChild(confirm_value);
+        }
+    </script>
+</head>
+
+
+<body>
+<!--  body wrapper -->
+<div id="wrapper">
+
+	<!--  Modals-->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 id="modal_baslik" class="modal-title">Modal Title</h4>
+				</div>
+				<div id="modal_mesaj" class="modal-body">
+					Message
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<button id="modal_btn" style="display:none;" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"></button>
+	 <!-- End Modals-->
+
+    <!-- navbar top -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
+	    <!-- navbar-header -->
+	    <div class="navbar-header">
+		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+			    <span class="sr-only">Toggle navigation</span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+			    <span class="icon-bar"></span>
+		    </button>
+		    <a class="navbar-brand" href="index.php">
+			    <img src="assets/img/logouzun_kısa.png"  border="0" alt="" style="margin-left:10px; margin-top:10px;">
+		    </a>
+	    </div>
+	    <!-- end navbar-header -->
+
+	    <!-- navbar-top-links -->
+	    <ul class="nav navbar-top-links navbar-right bg-light">
+		    <!-- main dropdown -->
+	
+		    <li class="dropdown" style='margin-left:250px;'>
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				    <i class="fa fa-user fa-3x"></i>
+			    </a>
+			    <!-- dropdown user-->
+			    <ul class="dropdown-menu dropdown-user">
+				    <li><a href="MyProfile.aspx"><i class="fa fa-user fa-fw"></i>My Profile</a>
+				    </li>
+				    <li class="disabled" ><a href="#"><i class="fa fa-gear fa-fw"></i>Setting</a>
+				    </li>
+				    <li class="divider"></li>
+				    <li><a href="Logout.aspx"><i class="fa fa-sign-out fa-fw"></i>Log Out</a>
+				    </li>
+			    </ul>
+			    <!-- end dropdown-user -->
+		    </li>
+		    <!-- end main dropdown -->
+	    </ul>
+	    <!-- end navbar-top-links -->
+    </nav>
+    <!-- end navbar top -->
+    
+    
+    
+    <!-- navbar side -->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+	    <!-- sidebar-collapse -->
+	    <div class="sidebar-collapse">
+		    <!-- side-menu -->
+		    <ul class="nav" id="side-menu">
+			    <li>
+				    <!-- user image section-->
+				    <div class="user-section">
+					    <div class="user-section-inner">
+                            <!-- User Photo-->
+						    <asp:Image id="userImage" runat="server" ImageUrl="photos/person.jpg" Text="User Image" Width="" height="" style="border:2px solid;" />
+					    </div>
+					    <div class="user-info">
+						    <div class="" style="max-width:150px;">
+                            <!-- User Name-->
+                                <asp:Label ID="userName" runat="server" Text="Name"></asp:Label>
+						    </div>
+						    <div class="user-text-online">
+							    <small><span class="user-circle-online btn btn-success btn-circle " onclick="location.href='Logout.aspx';"></span>&nbsp;Online</small>
+						    </div>
+					    </div>
+				    </div>
+				    <!--end user image section-->
+			    </li>
+			    <li class="sidebar-search">
+				    <form action="VideoSearch.aspx" method="post">
+				    <!-- search section-->
+				    <div class="input-group custom-search-form">
+					    <input type="text" name="searchText" class="form-control" placeholder="Search...">
+					    <span class="input-group-btn">
+						    <button class="btn btn-default" type="submit">
+							    <i class="fa fa-search"></i>
+						    </button>
+					    </span>
+				    </div>
+				    </form>
+				    <!--end search section-->
+			    </li>
+			    <!-- Genel -->
+			    <li class="">
+				    <a href="/"><i class="fa fa-home fa-fw"></i>Home Page</a>
+			    </li>
+			    <li class="">
+				    <a href="MyProfile.aspx"><i class="fa fa-user fa-fw"></i>My Profile</a>
+			    </li>
+                 <li class="">
+				    <a href="VideoSearch.aspx"><i class="fa fa-list fa-fw"></i>Videos</a>
+			    </li>
+                
+                <% if (Session["usertype"].ToString()=="1") { %>
+                    <li class="">
+				        <a href="VideoAdd.aspx"><i class="fa fa-play fa-fw"></i>Add New Video</a>
+			        </li>
+                    <li class="">
+				        <a href="VideoSearch.aspx?cat=my"><i class="fa fa-video-camera fa-fw"></i>My Videos</a>
+			        </li>
+                <% } %>
+                
+
+                <% if (Session["admin"].ToString()=="True") { %>
+                    <li class="">
+				        <a href="AdminUsers.aspx?cat=apr"><i class="fa fa-list fa-fw"></i>Waiting Approvements</a>
+			        </li>
+			        <li class="">
+				        <a href="AdminUsers.aspx?cat=ins"><i class="fa fa-university fa-fw"></i>Instructors</a>
+			        </li>
+                     <li class="">
+				        <a href="AdminUsers.aspx?cat=std"><i class="fa fa-graduation-cap fa-fw"></i>Students</a>
+			        </li>
+                    <li class="">
+				        <a href="AdminUsers.aspx?cat=oth"><i class="fa fa-object-group fa-fw"></i>Other Staff</a>
+			        </li>
+                <li class="">
+				        <a href="AdminUsers.aspx"><i class="fa fa-list fa-fw"></i>All Users</a>
+			        </li>
+                <% } %>
+		      </ul>
+		    <!-- end side-menu -->
+	    </div>
+	    <!-- end sidebar-collapse -->
+    </nav>
+
+    <!-- end navbar side -->
+        
+    <!--  page-wrapper / Sayfa Başlangıcı-->
+    <div id="page-wrapper" style="background-color:white">
+        <%-- This place holder is for the content from content pages.--%>
+        <asp:ContentPlaceHolder id="content_holder" runat="server">
+        </asp:ContentPlaceHolder>
+        <br />
+    <p class="text-center" style="border-top:1px solid #eeeeee;"><br /><a href="Javascript:history.back();">Go Back</a></p>
+    </div>
+    <!-- page end wrapper -->
+    
+
+    <!--  Footer -->
+    <div>
+        <asp:ContentPlaceHolder ID="footer_holder" Runat="Server">
+        </asp:ContentPlaceHolder>
+    </div>
+
+
+<!-- end body wrapper -->
+</div>
+    <p class="text-center">
+        <asp:Label ID="bottomLabel" runat="server" Text="Company Information"></asp:Label>
+    </p>
+
+    <!-- Core Scripts - Include with every page -->
+    <script src="assets/plugins/jquery-1.10.2.js"></script>
+    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="assets/plugins/pace/pace.js"></script>
+    <script src="assets/scripts/siminta.js"></script>
+
+</body>
+
+</html>
+
