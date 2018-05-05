@@ -20,9 +20,8 @@
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="25dp"
         android:background="@drawable/ic_fiber_manual_record_black_24dp"
-        android:padding="100dp"
+        android:padding="50dp"
         android:visibility="visible" />
 
     <Button
