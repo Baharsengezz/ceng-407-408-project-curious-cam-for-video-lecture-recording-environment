@@ -12,7 +12,6 @@ faceX = 0
 faceY = 0
 lastX = 0
 lastY = 0
-displacementX = 0
 
 servo.servoMid()
 
@@ -35,22 +34,21 @@ while True:
                 resY = cmd[2]
                 centerX = float(resX)/2
                 centerY = float(resY)/2
-                displacementX = float(resX)/4
-                print("disX:",resX," disY:",resY,"centerX:",centerX,"centerY:",centerY,"disX:",displacementX)
-            if cmd[0] == "FACE":
+                print("disX:",resX," disY:",resY,"centerX:",centerX,"centerY:",centerY)
+            if cmd[0] == "FACEX":
                 faceX = cmd[1]
-                faceY = cmd[2]
-                if (abs(float(faceX)-float(lastX)) < (centerX-displacementX)) or (abs(float(faceX)-float(lastX)) > (centerX+displacementX)):
-                    servo.controlServo(faceX,faceY,centerX,centerY)
-                    lastX = faceX
-                    sleep(1)
-                #print("X:", faceX ," Y:", faceY)
+                servo.controlServoX(faceX,centerX)
+            if cmd[0] == "FACEY":
+                faceY = cmd[1]
+                servo.controlServoY(faceY,centerY)
             
             if cmd[0] == "UP":
                 print("UP")
+                servo.turnUp()
             
             if cmd[0] == "DOWN":
                 print("DOWN")
+                servo.turnDown()
                 
             if cmd[0] == "RIGHT":
                 print("RIGHT")
