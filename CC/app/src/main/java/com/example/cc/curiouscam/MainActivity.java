@@ -1,6 +1,7 @@
 package com.example.cc.curiouscam;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
@@ -9,6 +10,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.Environment;
 import android.os.Process;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     //Socket Client Server
     private Client mClient;
+    private String directoryName = "Curious Cam";
 
     //Booleans
     private boolean clicked = true;
@@ -87,8 +91,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     //Frame
     private Frame videoImage = null;
     //Frame Width, Height and rate
-    private int imageWidth = 320;
-    private int imageHeight = 240;
+    private int imageWidth = 1280;
+    private int imageHeight = 720;
     private int frameRate = 30;
 
     //Create recorder and audio thread
@@ -321,7 +325,6 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         mRgba = inputFrame.rgba();
         mGray = inputFrame.gray();
 
-
         if(recording)
         {
             byte[] byteFrame = new byte[(int) (mRgba.total()*mRgba.channels())];
@@ -446,6 +449,12 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
             recorder = null;
 
         }
+        launchUploadActivity();
+    }
+    private void launchUploadActivity(){
+        Intent i = new Intent(MainActivity.this, UploadActivity.class);
+        i.putExtra("filePath", videoPath);
+        startActivity(i);
     }
 
     ///////////////////////////////LOAD PROFILE AND FRONTAL LBP CASCADES///////////////////////////
@@ -505,7 +514,21 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         }
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
 
-        videoPath = "/mnt/sdcard/CC_"+timeStamp+".mp4";
+        File mediaDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),directoryName);
+
+        if(!mediaDir.exists())
+        {
+            if(!mediaDir.mkdir())
+            {
+                Log.d(TAG,"Creating directory failed!");
+            }
+        }
+
+        File videoFile = new File(mediaDir.getPath()+File.separator+"CC_"+timeStamp+".mp4");
+
+        Log.d(TAG,"Video file = "+videoFile.getPath());
+
+        videoPath = videoFile.getPath();
         recorder = new FFmpegFrameRecorder(videoPath,imageWidth,imageHeight,1);
         recorder.setFormat("mp4");
         recorder.setSampleRate(sampleAudioRateInHz);
