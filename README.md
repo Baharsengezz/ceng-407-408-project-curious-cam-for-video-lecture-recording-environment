@@ -131,7 +131,7 @@ post_max_size = 50M
 
 **5.** Go back to android project and change the line below inside the UploadActivity.java with the server IP address.
 
-private String uploadURL = "http://192.168.4.3/VideoUpload/videoUpload.php";
+'private String uploadURL = "http://192.168.4.3/VideoUpload/videoUpload.php";'
 
 # USER MANUAL 
 
